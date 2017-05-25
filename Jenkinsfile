@@ -61,7 +61,4 @@ try {
 
 } catch (Exception e) { 	e.printStackTrace();	}
 
-
-} catch (Exception e) { 	e.printStackTrace();	}
-
 }
