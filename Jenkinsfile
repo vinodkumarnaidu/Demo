@@ -1,6 +1,5 @@
 import groovy.grape.*
 import com.jcraft.jsch.*;
-import org.testng.internal.PropertiesFile
 pipeline {
   /**
  * Created by admin on 24-May-17.
