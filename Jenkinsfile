@@ -1,19 +1,20 @@
+ @Library('ant-jsch-1.8.1,jar')
+@Library('jsch-0.1.54,jar')
 import groovy.grape.*
 import com.jcraft.jsch.*;
+import org.testng.internal.PropertiesFile
 pipeline {
-  /**
- * Created by admin on 24-May-17.
- */
+
 
 Grape.grab(group:"ant", module:"ant-jsch", version:"1.6.5", classLoader:this.class.classLoader.rootLoader)
 Grape.grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this.class.classLoader.rootLoader)
 
-def properties = new Properties()
-File propertiesFile = new File("variables.properties")
+def properties = readProperties file: 'variables.properties'
+/*File propertiesFile = new File("variables.properties")
 
 propertiesFile.withInputStream {
     properties.load(it)
-}
+}*/
 println "-------Properties-----------"+properties
 
 def ant = new AntBuilder();
