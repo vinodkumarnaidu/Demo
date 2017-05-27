@@ -1,4 +1,3 @@
-package com.scripts
 
 /**
  * Created by admin on 24-May-17.
@@ -7,6 +6,7 @@ package com.scripts
 @Library('jsch')
 @Library('groovy.grape')
 @Library('com.jcraft.')
+load !{user.home}/.groovy/lib/
 import groovy.grape.*
 import com.jcraft.jsch.*;
 import org.testng.internal.PropertiesFile
@@ -16,11 +16,7 @@ Grape.grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this
 node{
 
     def properties = readProperties file: 'variables.properties'
-/*File propertiesFile = new File("variables.properties")
 
-propertiesFile.withInputStream {
-    properties.load(it)
-}*/
     println "-------Properties-----------"+properties
 
     def ant = new AntBuilder();
