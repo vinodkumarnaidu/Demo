@@ -1,3 +1,5 @@
+
+node{
 def properties = readProperties file: 'variables.properties'
 println "-------Properties-----------"+properties
 int port = Integer.parseInt("${properties.PORT}")
@@ -11,4 +13,6 @@ ant.scp(trust: 'true',
         port: port,
         keyfile: privateKey,
         //passphrase: Passphrase,
-        verbose: "true")
+        verbose: "true")     
+}
+
