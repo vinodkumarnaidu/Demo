@@ -41,18 +41,12 @@ secretText = new StringCredentialsImpl(
         Secret.fromString("some secret text goes here"))
 
 factory = new DiskFileItemFactory()
-dfi = factory.createItem("", "application/octet-stream", false, "filename")
+dfi = factory.createItem("", "application/octet-stream", false, "C://Users//admin//Downloads//LinuxKeyPair.ppk")
 out = dfi.getOutputStream()
 file = new File("/opt/copied/")
 Files.copy(file.toPath(), out)
 //FileCredentailsImpl can take a file from a do
-secretFile = new FileCredentialsImpl(
-        CredentialsScope.GLOBAL,
-        "secret-file",
-        "Secret File Description"
-        dfi, // Don't use FileItem
-        "",
-        "")
+secretFile = new FileCredentialsImpl(CredentialsScope.GLOBAL,"",dfi,"","")
 
 
 store.addCredentials(domain, priveteKey)
