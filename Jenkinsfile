@@ -1,56 +1,70 @@
 
 pipeline {
+package com.scripts
 
-import jenkins.model.*
-import com.cloudbees.plugins.credentials.*
-import com.cloudbees.plugins.credentials.common.*
-import com.cloudbees.plugins.credentials.domains.*
-import com.cloudbees.plugins.credentials.impl.*
-import com.cloudbees.jenkins.plugins.sshcredentials.impl.*
-import org.jenkinsci.plugins.plaincredentials.*
-import org.jenkinsci.plugins.plaincredentials.impl.*
-import hudson.util.Secret
-import hudson.plugins.sshslaves.*
-import org.apache.commons.fileupload.*
-import org.apache.commons.fileupload.disk.*
-import java.nio.file.Files
+/**
+ * Created by admin on 24-May-17.
+ */
+@Library('ant-jsch')
+@Library('jsch')
+@Library('groovy.grape')
+@Library('com.jcraft.')
+import groovy.grape.*
+import com.jcraft.jsch.*;
+import org.testng.internal.PropertiesFile
 
-def domain = Domain.global()
-def store = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials.SystemCredentialsProvider')[0].getStore()
+Grape.grab(group:"ant", module:"ant-jsch", version:"1.6.5", classLoader:this.class.classLoader.rootLoader)
+Grape.grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this.class.classLoader.rootLoader)
 
-priveteKey = new BasicSSHUserPrivateKey(
-        CredentialsScope.GLOBAL,
-        "C://Users//admin//Downloads//LinuxKeyPair.ppk",
-        "ec2-user",
-        new BasicSSHUserPrivateKey.UsersPrivateKeySource(),
-        "",
-        ""
-)
+def properties = readProperties file: 'variables.properties'
+/*File propertiesFile = new File("variables.properties")
 
-usernameAndPassword = new UsernamePasswordCredentialsImpl(
-        CredentialsScope.GLOBAL,
-        "C://Users//admin//Downloads//LinuxKeyPair.ppk", "34.207.153.136",
-        "ec2-user",
-        "22"
-)
+propertiesFile.withInputStream {
+    properties.load(it)
+}*/
+println "-------Properties-----------"+properties
 
-secretText = new StringCredentialsImpl(
-        CredentialsScope.GLOBAL,
-        "secret-text",
-        "Secret Text Description",
-        Secret.fromString("some secret text goes here"))
+def ant = new AntBuilder();
 
-factory = new DiskFileItemFactory()
-dfi = factory.createItem("", "application/octet-stream", false, "C://Users//admin//Downloads//LinuxKeyPair.ppk")
-out = dfi.getOutputStream()
-file = new File("/opt/copied/")
-Files.copy(file.toPath(), out)
-//FileCredentailsImpl can take a file from a do
-secretFile = new FileCredentialsImpl(CredentialsScope.GLOBAL,"",dfi,"","")
+String host= new String("${properties.getProperty('HOST_NAME')}")
+println "------------------hostname------------"+host
 
+int port = Integer.parseInt("${properties.PORT}")
+String username =  new String("${properties.USER_NAME}")
+String privateKey = new String("${properties.PRIVATE_KEY}")
+println "vinod-----------------------"+privateKey
 
-store.addCredentials(domain, priveteKey)
-store.addCredentials(domain, usernameAndPassword)
-store.addCredentials(domain, secretText)
-store.addCredentials(domain, secretFile)
+JSch jsch = null;
+Session session = null;
+Channel channel = null;
+//ChannelSftp c = null;
+Process p
+try {
+
+    jsch = new JSch()
+    jsch.addIdentity(privateKey);
+    println "Identity Added"
+    session = jsch.getSession(username,host,port)
+    java.util.Properties config = new java.util.Properties();
+    config.put("StrictHostKeyChecking", "no");
+    session.setConfig(config);
+    println "Establishing Connection--------------"
+    session.connect();
+    println "Connection------Established--------"
+    System.out.println("Creating SFTP Channel.");
+    channel = session.openChannel("sftp");
+    channel.setInputStream(System.in);
+    channel.setOutputStream(System.out);
+    channel.connect();
+    System.out.println("shell channel connected....");
+    ChannelSftp c = (ChannelSftp) channel;
+    slackSend (color: '#FFFF00', message: "Starting File Upload:")
+    System.out.println("Starting File Upload:");
+    String fsrc = "C://Users//admin//Downloads//LinuxKeyPair.ppk", fdest = "/opt/copied/";
+    c.put(fsrc, fdest);
+    slackSend (color: '#00FF00', message: "Starting File Upload:")
+    println "FileCopied"
+
+} catch (Exception e) { 	e.printStackTrace();	}
+
 }
