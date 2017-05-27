@@ -1,6 +1,5 @@
 
 pipeline {
-package com.scripts
 
 /**
  * Created by admin on 24-May-17.
