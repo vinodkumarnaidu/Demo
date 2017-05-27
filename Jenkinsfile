@@ -2,10 +2,10 @@
 /**
  * Created by admin on 24-May-17.
  */
-@Library('ant-jsch')
-@Library('jsch')
-@Library('groovy.grape')
-@Library('com.jcraft.')
+@Library('ant-jsch-1.8.1.jar')
+@Library('jsch-0.1.54.jar')
+@Library('groovy.grape.*')
+@Library('com.jcraft.jsch.*')
 load !{user.home}/.groovy/lib/
 import groovy.grape.*
 import com.jcraft.jsch.*;
