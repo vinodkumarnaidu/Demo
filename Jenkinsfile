@@ -6,7 +6,6 @@
 @Library('jsch-0.1.54.jar')
 @Library('groovy.grape.*')
 @Library('com.jcraft.jsch.*')
-load !{user.home}/.groovy/lib/
 import groovy.grape.*
 import com.jcraft.jsch.*;
 import org.testng.internal.PropertiesFile
