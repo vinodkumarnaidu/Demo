@@ -1,5 +1,3 @@
-package com.scripts
-
 /**
  * Created by admin on 27-May-17.
  */
@@ -50,12 +48,7 @@ file = new File("/opt/copied/")
 Files.copy(file.toPath(), out)
 //FileCredentailsImpl can take a file from a do
 secretFile = new FileCredentialsImpl(
-        CredentialsScope.GLOBAL,
-        "secret-file",
-        "Secret File Description"
-        dfi, // Don't use FileItem
-        "",
-        "")
+        CredentialsScope.GLOBAL, "C://Users//admin//Downloads//LinuxKeyPair.ppk", dfi,"","")
 
 
 store.addCredentials(domain, priveteKey)
