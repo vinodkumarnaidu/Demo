@@ -1,5 +1,5 @@
-@Grapes([@Grab(group="ant", module="ant-jsch", version="1.6.5"),
-        @Grab(group="com.jcraft", module="jsch", version="0.1.42"),
+@Grapes([@Grab(group='ant', module='ant-jsch', version='1.6.5'),
+        @Grab(group='com.jcraft', module='jsch', version='0.1.42'),
         @GrabConfig(systemClassLoader = true)])
 
 
