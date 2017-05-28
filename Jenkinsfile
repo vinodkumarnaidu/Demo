@@ -1,3 +1,3 @@
 node{
-    Jenkinsfile.groovy
+    scpTransfer()
 }
