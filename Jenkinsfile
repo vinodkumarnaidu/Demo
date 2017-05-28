@@ -1,6 +1,7 @@
 stage('Import dependencies')
-@Grab(group:"ant", module:"ant-jsch", version:"1.6.5", classLoader:this.class.classLoader.rootLoader)
-@Grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this.class.classLoader.rootLoader)
+@Grab(group="ant", module="ant-jsch", version="1.6.5")
+@Grab(group="com.jcraft", module="jsch", version="0.1.42")
+
 
 
 import groovy.grape.*
