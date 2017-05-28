@@ -6,7 +6,7 @@ Grape.grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this
 
 
 def scpTransfer(){
-     println "-------Properties-----------"+properties
+     echo "-------Properties-----------"+properties
     def properties = readProperties file: 'variables.properties'
 /*File propertiesFile = new File("variables.properties")
 
