@@ -1,11 +1,13 @@
- node {  
 
-@Grab("ant-jsch-1.8.1")
-@Grab("jsch-0.1.54")
+@Grab('ant-jsch-1.8.1')
+@Grab('jsch-0.1.54')
+@Grab('groovy.grape')
 import groovy.grape.*
 import com.jcraft.jsch.*;
 
-def scpTransfer(){
+node {  
+
+
     def properties = readProperties file: 'variables.properties'
 
     println "-------Properties-----------"+properties
@@ -51,8 +53,6 @@ def scpTransfer(){
         println "FileCopied"
 
     } catch (Exception e) { 	e.printStackTrace();	}
-
-}
 
  }
  
