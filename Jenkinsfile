@@ -1,6 +1,7 @@
 
-@Grab(group('com.jcraft'))
-@Grab(group('ant'))
+@Grab(group:"ant", module:"ant-jsch", version:"1.6.5", classLoader:this.class.classLoader.rootLoader)
+@Grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this.class.classLoader.rootLoader)
+
 
 import groovy.grape.*
 import com.jcraft.jsch.*;
