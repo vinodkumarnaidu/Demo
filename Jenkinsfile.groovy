@@ -1,12 +1,12 @@
 import groovy.grape.*
 import com.jcraft.jsch.*;
 
-
 Grape.grab(group:"ant", module:"ant-jsch", version:"1.6.5", classLoader:this.class.classLoader.rootLoader)
 Grape.grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this.class.classLoader.rootLoader)
 
 
 def scpTransfer(){
+     println "-------Properties-----------"+properties
     def properties = readProperties file: 'variables.properties'
 /*File propertiesFile = new File("variables.properties")
 
