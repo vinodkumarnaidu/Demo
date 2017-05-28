@@ -8,11 +8,6 @@ Grape.grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this
 def scpTransfer(){
      echo "-------Properties-----------"+properties
     def properties = readProperties file: 'variables.properties'
-/*File propertiesFile = new File("variables.properties")
-
-propertiesFile.withInputStream {
-    properties.load(it)
-}*/
     println "-------Properties-----------"+properties
 
     def ant = new AntBuilder();
