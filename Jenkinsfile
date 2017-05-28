@@ -1,4 +1,4 @@
-@Grab(group='com.jcraft', module='jsch', version='0.1.42)
+@Grab(group='com.jcraft', module='jsch', version='0.1.42')
 import com.jcraft.jsch.*;
 
     def properties = readProperties file: 'variables.properties'
