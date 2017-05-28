@@ -1,7 +1,6 @@
 import groovy.grape.*
 import com.jcraft.jsch.*;
-@Library('import org.testng.internal')
-import org.testng.internal.PropertiesFile
+
 
 Grape.grab(group:"ant", module:"ant-jsch", version:"1.6.5", classLoader:this.class.classLoader.rootLoader)
 Grape.grab(group:"com.jcraft", module:"jsch", version:"0.1.42", classLoader:this.class.classLoader.rootLoader)
