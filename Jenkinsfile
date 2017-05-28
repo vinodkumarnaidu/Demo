@@ -1,4 +1,5 @@
  node {
-def groovyscript = load 'https://github.com/vinodkumarnaidu/Demo/Jenkinsfile.groovy'
+def groovyscript =load("Jenkinsfile.groovy")
 groovyscript.scpTransfer()
  }
+ 
