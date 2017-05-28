@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'make' 
-                archiveArtifacts artifacts: '**/Jenkinsfile.groovy', fingerprint: true 
+                archiveArtifacts artifacts: '../Jenkinsfile.groovy', fingerprint: true 
             }
         }
     }
